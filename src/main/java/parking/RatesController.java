@@ -35,10 +35,11 @@ public class RatesController {
 	    
 	}
 	
-	@RequestMapping("/getcharge")
-    public String chargedate(@RequestParam(value="startDate") String startDateString,
+	@RequestMapping("/price")
+    public String price(@RequestParam(value="startDate") String startDateString,
     		@RequestParam(value="endDate") String endDateString) throws ParseException {
     	
+		//Parse the input parameters into the ISO date format and then format into the required formats
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		DateFormat dfYmd = new SimpleDateFormat("yyyy-MM-dd");
 		DateFormat dayOnly = new SimpleDateFormat("EEE");
@@ -51,17 +52,20 @@ public class RatesController {
 		String startYmd = dfYmd.format(startDate);
 		String endYmd = dfYmd.format(endDate);
 		
+		//Do not allow parking overnight
 		if (!startYmd.equals(endYmd)) {
 			String noOvernightParking = "Overnight parking is not allowed.";
 			return noOvernightParking;
 		}
 		
 		String startDay = dayOnly.format(startDate).toLowerCase();
-		String endDay = dayOnly.format(endDate).toLowerCase();
 		
 		String startHour = hourAndMin.format(startDate);
 		String endHour = hourAndMin.format(endDate);
 		
+		//Iterate through the rate list and check if that rate is for the requested day
+		//If true, then check if the requested time is completed encapsulated by that rate
+		//If it is then return the price
 		for (Rate rate : input.getRatesList()) {
 			if (rate.getDays().contains(startDay)) {
 				if (Integer.parseInt(rate.getTimes().substring(0, 4)) < Integer.parseInt(startHour) && Integer.parseInt(rate.getTimes().substring(5)) > Integer.parseInt(endHour)) {

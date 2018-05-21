@@ -52,42 +52,42 @@ public class RatesControllerTests {
     @Test
     public void setRateandgetChargeShouldReturnCorrectRate() throws Exception {
     	
-    	this.mockMvc.perform(get("/getcharge").param("startDate","2018-05-15T10:00:00Z").param("endDate","2018-05-15T20:00:00Z"))
+    	this.mockMvc.perform(get("/price").param("startDate","2018-05-15T10:00:00Z").param("endDate","2018-05-15T20:00:00Z"))
     		.andDo(print())
     		.andExpect(status().isOk())
     		.andExpect(content().string("1500"));
     	
-    	this.mockMvc.perform(get("/getcharge").param("startDate","2018-05-18T10:00:00Z").param("endDate","2018-05-18T20:00:00Z"))
+    	this.mockMvc.perform(get("/price").param("startDate","2018-05-18T10:00:00Z").param("endDate","2018-05-18T20:00:00Z"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().string("2000"));
     	
-    	this.mockMvc.perform(get("/getcharge").param("startDate","2018-05-16T07:00:00Z").param("endDate","2018-05-16T17:00:00Z"))
+    	this.mockMvc.perform(get("/price").param("startDate","2018-05-16T07:00:00Z").param("endDate","2018-05-16T17:00:00Z"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().string("1750"));
     	
-    	this.mockMvc.perform(get("/getcharge").param("startDate","2018-05-19T02:00:00Z").param("endDate","2018-05-19T04:00:00Z"))
+    	this.mockMvc.perform(get("/price").param("startDate","2018-05-19T02:00:00Z").param("endDate","2018-05-19T04:00:00Z"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().string("1000"));
     	
-    	this.mockMvc.perform(get("/getcharge").param("startDate","2018-05-20T02:00:00Z").param("endDate","2018-05-20T06:00:00Z"))
+    	this.mockMvc.perform(get("/price").param("startDate","2018-05-20T02:00:00Z").param("endDate","2018-05-20T06:00:00Z"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().string("925"));
     	
-    	this.mockMvc.perform(get("/getcharge").param("startDate","2018-05-20T02:00:00Z").param("endDate","2018-05-20T07:00:00Z"))
+    	this.mockMvc.perform(get("/price").param("startDate","2018-05-20T02:00:00Z").param("endDate","2018-05-20T07:00:00Z"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().string("unavailable"));
     	
-    	this.mockMvc.perform(get("/getcharge").param("startDate","2018-05-20T01:00:00Z").param("endDate","2018-05-20T06:00:00Z"))
+    	this.mockMvc.perform(get("/price").param("startDate","2018-05-20T01:00:00Z").param("endDate","2018-05-20T06:00:00Z"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().string("unavailable"));
     	
-    	this.mockMvc.perform(get("/getcharge").param("startDate","2018-05-20T00:00:00Z").param("endDate","2018-05-20T08:00:00Z"))
+    	this.mockMvc.perform(get("/price").param("startDate","2018-05-20T00:00:00Z").param("endDate","2018-05-20T08:00:00Z"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().string("unavailable"));
